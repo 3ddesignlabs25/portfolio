@@ -67,16 +67,31 @@
     </section>
 
     <section class="section">
-      <div class="container">
-        <h2>Problem</h2>
-        <p>
-          Learning and testing Python across multiple systems frequently led to
-          broken environments, dependency conflicts, and inconsistent results.
-          I needed a controlled, repeatable sandbox that could be rebuilt quickly
-          and accessed remotely for troubleshooting practice.
-        </p>
-      </div>
-    </section>
+  <div class="container">
+    <h2>Problem</h2>
+    <p>
+      As I worked through Python development, embedded tooling, and general systems
+      experimentation across multiple machines, I repeatedly ran into broken
+      environments, dependency conflicts, and inconsistent behavior between systems.
+      Small changes—such as installing a new package, updating the OS, or switching
+      Python versions—could silently break previously working code.
+    </p>
+    <p>
+      These issues made it difficult to determine whether failures were caused by
+      logic errors, environment misconfiguration, or system-level changes. Recovering
+      from these states often required manual cleanup, reinstalling packages, or
+      rebuilding environments without a clear record of what had changed.
+    </p>
+    <p>
+      I needed a dedicated, low-risk platform where experimentation, failure, and
+      recovery were expected and controlled. The goal was not just to write Python
+      code, but to develop a repeatable workflow for diagnosing environment issues,
+      validating fixes, and rebuilding systems predictably—skills directly applicable
+      to technical support and systems-focused roles.
+    </p>
+  </div>
+</section>
+
 
   <section class="section">
   <div class="container">
@@ -123,91 +138,217 @@
   <div class="container">
     <h2>System Overview</h2>
     <p>
-      The current system consists of a single Raspberry Pi configured as a
-      self-contained Python development sandbox. The Pi runs Raspberry Pi OS
-      and serves as a dedicated environment for writing, testing, and debugging
-      Python scripts without impacting other machines.
+      The intended system architecture centers around a Raspberry Pi acting as a
+      portable development host, automation controller, and deployment node. The Pi
+      runs a Linux-based workspace where scripts, build tools, and language runtimes
+      are managed through isolated environments and reproducible setup processes.
     </p>
     <p>
-      Python virtual environments are used to isolate dependencies and prevent
-      conflicts between projects. Development is performed primarily through the
-      terminal using SSH, mirroring workflows commonly found in technical support
-      and system administration roles.
+      A Python sandbox forms the foundation of the system, providing a controlled
+      space for scripting, testing, and troubleshooting. This sandbox is designed
+      to support expansion into additional languages such as C/C++ and Rust while
+      maintaining clear separation between projects and dependencies.
     </p>
     <p>
-      A shell-based setup script is used to automate system configuration,
-      dependency installation, and environment initialization. This allows the
-      sandbox to be rebuilt quickly if the system becomes misconfigured or
-      unstable.
+      An ESP32-C6 with a 1.47-inch LCD is planned as an integrated hardware test and
+      interaction layer. This microcontroller will be used for rapid validation of
+      scripts, testing servos and LEDs, and providing immediate visual feedback without
+      risking external hardware.
     </p>
     <p>
-      At this stage, the system does not include integrated displays, input
-      devices, or external microcontroller targets. The focus is on establishing
-      a reliable, reproducible foundation before layering additional hardware
-      and functionality.
+      The Raspberry Pi will also serve as the primary interface for flashing and
+      managing external target ESP devices. This separation allows the built-in
+      ESP32-C6 to function as a safe test platform while the Pi handles programming,
+      verification, and deployment to additional hardware.
+    </p>
+    <p>
+      Together, this architecture emphasizes isolation of responsibilities, fault
+      containment, and repeatable workflows, closely mirroring professional system
+      administration, embedded development, and technical support environments.
     </p>
   </div>
 </section>
 
 
-    <section class="section">
-      <div class="container">
-        <h2>What Worked</h2>
-        <ul>
-          <li>Virtual environments eliminated cross-project conflicts</li>
-          <li>SSH-only workflow reinforced real support scenarios</li>
-          <li>Automated setup reduced manual configuration errors</li>
-          <li>Quick recovery by rebuilding environments from script</li>
-        </ul>
-      </div>
-    </section>
 
     <section class="section">
-      <div class="container">
-        <h2>What Didn’t</h2>
-        <ul>
-          <li>System updates occasionally invalidated environments</li>
-          <li>Initial confusion between system Python and venv Python</li>
-          <li>Performance limits on heavier workloads</li>
-        </ul>
-      </div>
-    </section>
+  <div class="container">
+    <h2>What Worked</h2>
+    <ul>
+      <li>
+        <strong>Isolated Python virtual environments.</strong><br />
+        Using virtual environments consistently prevented system-level package
+        conflicts and allowed individual projects to install and modify dependencies
+        without affecting other work or the base OS.
+      </li>
+      <li>
+        <strong>Terminal-first workflow.</strong><br />
+        Performing all development and troubleshooting through the terminal (locally
+        and over SSH) reinforced disciplined workflows and made environment state more
+        visible and predictable.
+      </li>
+      <li>
+        <strong>Intentional failure and recovery.</strong><br />
+        Treating environment breakage as expected behavior rather than an exception
+        made it easier to diagnose issues and rebuild cleanly instead of attempting
+        risky partial fixes.
+      </li>
+      <li>
+        <strong>Automation through scripting.</strong><br />
+        Using a setup script to handle package installation and environment creation
+        reduced manual errors and made system recovery faster and more consistent.
+      </li>
+      <li>
+        <strong>Dedicated hardware for experimentation.</strong><br />
+        Keeping the sandbox isolated to a single Raspberry Pi allowed unrestricted
+        experimentation without concern for breaking primary development machines.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+   <section class="section">
+  <div class="container">
+    <h2>What Didn’t</h2>
+    <ul>
+      <li>
+        <strong>Environment fragility after system updates.</strong><br />
+        OS-level updates occasionally invalidated virtual environments, requiring
+        manual intervention or full rebuilds when Python versions or shared libraries
+        changed.
+      </li>
+      <li>
+        <strong>Ambiguity between system Python and virtual environments.</strong><br />
+        Early on, it was easy to unintentionally run scripts against the system Python
+        interpreter, leading to misleading errors and inconsistent behavior.
+      </li>
+      <li>
+        <strong>Limited visibility into partial failures.</strong><br />
+        Some dependency issues failed silently or surfaced only at runtime, making
+        root-cause analysis slower without deliberate inspection of environment state.
+      </li>
+      <li>
+        <strong>Manual setup overhead during iteration.</strong><br />
+        Until automation was introduced, rebuilding environments required repetitive
+        manual steps, increasing the likelihood of configuration drift.
+      </li>
+      <li>
+        <strong>Hardware performance constraints.</strong><br />
+        The Raspberry Pi Zero 2 W imposed limits on compile times and parallel workloads,
+        reinforcing the need for lightweight tooling and staged expansion.
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+   <section class="section">
+  <div class="container">
+    <h2>How I Debugged It</h2>
+    <ol>
+      <li>
+        <strong>Confirmed the active execution context.</strong><br />
+        Verified which Python interpreter was being used by checking paths and
+        executable locations. This ensured scripts were not accidentally running
+        against the system Python instead of the virtual environment.
+      </li>
+      <li>
+        <strong>Validated environment activation and isolation.</strong><br />
+        Explicitly activated the virtual environment and confirmed environment
+        variables such as <code>VIRTUAL_ENV</code> and <code>PATH</code> were set
+        correctly. This helped rule out partial or failed activations.
+      </li>
+      <li>
+        <strong>Inspected installed dependencies.</strong><br />
+        Reviewed installed packages and versions within the virtual environment
+        to identify missing, outdated, or conflicting dependencies that could
+        explain unexpected behavior.
+      </li>
+      <li>
+        <strong>Reproduced failures intentionally.</strong><br />
+        Re-ran failing scripts in a controlled manner to ensure issues were
+        repeatable rather than intermittent. This helped distinguish logic errors
+        from environment-related problems.
+      </li>
+      <li>
+        <strong>Reset and rebuilt when state became unclear.</strong><br />
+        When troubleshooting pa
+
 
     <section class="section">
-      <div class="container">
-        <h2>How I Debugged It</h2>
-        <ol>
-          <li>Confirmed active Python interpreter and PATH</li>
-          <li>Validated virtual environment activation</li>
-          <li>Checked installed packages and versions</li>
-          <li>Rebuilt environments when state was ambiguous</li>
-          <li>Documented steps to ensure repeatability</li>
-        </ol>
-      </div>
-    </section>
+  <div class="container">
+    <h2>Current State</h2>
+    <p>
+      The current implementation is a bare Raspberry Pi configured as a dedicated
+      Python development sandbox. The system runs Raspberry Pi OS and is used
+      exclusively for experimentation, scripting, and troubleshooting without
+      affecting primary machines or production environments.
+    </p>
+    <p>
+      A Python virtual environment is fully set up and serves as the primary workspace.
+      This allows packages, dependencies, and test scripts to be installed, modified,
+      and removed freely without risking system-level breakage. When environments
+      become unstable, they can be rebuilt quickly using documented steps and
+      automation scripts.
+    </p>
+    <p>
+      At this stage, the focus is intentionally narrow: validating environment
+      isolation, practicing recovery from broken states, and reinforcing disciplined
+      troubleshooting habits. No external hardware integration or deployment targets
+      are currently in use, allowing failures to be explored safely and repeatedly.
+    </p>
+    <p>
+      This foundation establishes a reliable baseline on which additional tooling,
+      hardware interfaces, and automation can be layered without compromising system
+      stability.
+    </p>
+  </div>
+</section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Current State</h2>
-        <p>
-          The sandbox is stable and used regularly for Python development and
-          troubleshooting practice. It serves as a safe test platform for learning
-          without risking system-wide configuration issues.
-        </p>
-      </div>
-    </section>
+   <section class="section">
+  <div class="container">
+    <h2>Next Steps</h2>
+    <ul>
+      <li>
+        <strong>Expand language support.</strong><br />
+        Incrementally add support for additional mainstream programming languages
+        beyond Python, C/C++, and Rust. This includes languages such as Java,
+        JavaScript/Node.js, Go, Lua, and others commonly used in scripting,
+        automation, and systems work, with the goal of running them directly
+        from a single Raspberry Pi environment.
+      </li>
+      <li>
+        <strong>Evaluate multi-Pi language separation.</strong><br />
+        Experiment with running alternate Raspberry Pi systems dedicated to
+        specific language stacks when isolation or tooling conflicts arise,
+        while keeping the primary focus on consolidating as many workflows as
+        possible onto one main system.
+      </li>
+      <li>
+        <strong>Establish basic deployment tooling.</strong><br />
+        Implement scripts and procedures for uploading and managing code on
+        external target ESP devices, using the Raspberry Pi as the central
+        control and orchestration point.
+      </li>
+      <li>
+        <strong>Integrate local hardware testing.</strong><br />
+        Begin incorporating an ESP32-C6 with a small display as a dedicated
+        hardware test interface for validating scripts, testing servos and LEDs,
+        and providing rapid feedback during development.
+      </li>
+      <li>
+        <strong>Refactor and harden the setup process.</strong><br />
+        Once language workflows and hardware integration are well understood,
+        revisit the setup scripts to refactor, simplify, and harden the overall
+        installation process so the entire system can be rebuilt cleanly and
+        predictably.
+      </li>
+    </ul>
+  </div>
+</section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Next Steps</h2>
-        <ul>
-          <li>Add a C++ build and test workflow</li>
-          <li>Introduce Rust tooling alongside Python</li>
-          <li>Expand automation within the setup script</li>
-          <li>Document recovery steps as a support runbook</li>
-        </ul>
-      </div>
-    </section>
+
 
     <section class="section">
   <div class="container">
