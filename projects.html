@@ -3,15 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project 02 | Michael Butler</title>
-  <meta name="description" content="Help-desk-focused project documenting problem analysis, constraints, debugging steps, and current state." />
+  <title>Projects | Michael Butler</title>
+  <meta name="description" content="Help-desk-focused projects demonstrating systems setup, troubleshooting, scripting, and iterative learning across Linux, Python, and embedded tooling." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- NAVBAR: Home now explicitly references index.html -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html" aria-label="Home">
@@ -33,56 +32,287 @@
   </header>
 
   <main id="main" class="main">
-    <!-- Table of Contents -->
-    <section class="section">
-      <div class="container">
-        <h2>Contents</h2>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#problem">Problem</a></li>
-          <li><a href="#constraints">Constraints</a></li>
-          <li><a href="#system-overview">System Overview</a></li>
-          <li><a href="#what-worked">What Worked</a></li>
-          <li><a href="#what-didnt">What Didn’t</a></li>
-          <li><a href="#debugging">How I Debugged It</a></li>
-          <li><a href="#current-state">Current State</a></li>
-          <li><a href="#next-steps">Next Steps</a></li>
-          <li><a href="#artifacts">Artifacts</a></li>
-        </ul>
-      </div>
-    </section>
+    <!-- ========================= -->
+    <!-- PROJECT 01: ACTIVE PROJECT -->
+    <!-- ========================= -->
 
-    <!-- Home -->
-    <section id="home" class="hero">
+    <section class="hero">
       <div class="container">
-        <p class="kicker">Project Home</p>
+        <p class="kicker">Project</p>
 
-        <h1 class="headline">[INSERT PROJECT TITLE]</h1>
+        <h1 class="headline">Raspberry Pi Python Sandbox</h1>
 
         <p class="summary">
-          [One-sentence explanation of what this project is, why it exists,
-          and how it demonstrates troubleshooting, systems thinking,
-          or technical support skills.]
+          A portable Python sandbox built on a Raspberry Pi to safely develop, test,
+          and troubleshoot scripts in isolated environments. Designed to mirror
+          real technical support workflows, emphasize reproducibility, and support
+          future multi-language expansion.
         </p>
 
         <dl class="meta">
           <div class="meta-row">
             <dt>Role</dt>
-            <dd>[INSERT ROLE]</dd>
+            <dd>Designer • Builder • Troubleshooter</dd>
           </div>
           <div class="meta-row">
             <dt>Tools</dt>
-            <dd>[INSERT TOOLS]</dd>
+            <dd>Raspberry Pi Zero 2 W, Linux, Python, Bash, SSH, Git</dd>
           </div>
           <div class="meta-row">
             <dt>Status</dt>
-            <dd>[INSERT STATUS]</dd>
+            <dd>Active / Expanding</dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <!-- Remaining sections unchanged -->
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
+        <p>
+          Learning and testing Python across multiple systems frequently led to
+          broken environments, dependency conflicts, and inconsistent results.
+          I needed a controlled, repeatable sandbox that could be rebuilt quickly
+          and accessed remotely for troubleshooting practice.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Constraints</h2>
+        <ul>
+          <li>Limited hardware resources (Raspberry Pi Zero 2 W)</li>
+          <li>Must be operable entirely over SSH</li>
+          <li>Environments must be disposable and rebuildable</li>
+          <li>No reliance on primary development machines</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>System Overview</h2>
+        <p>
+          The system runs Raspberry Pi OS with a structured directory layout.
+          Python virtual environments isolate projects, while Git handles version
+          control. A shell-based setup script automates initial configuration,
+          package installation, and environment creation.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What Worked</h2>
+        <ul>
+          <li>Virtual environments eliminated cross-project conflicts</li>
+          <li>SSH-only workflow reinforced real support scenarios</li>
+          <li>Automated setup reduced manual configuration errors</li>
+          <li>Quick recovery by rebuilding environments from script</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What Didn’t</h2>
+        <ul>
+          <li>System updates occasionally invalidated environments</li>
+          <li>Initial confusion between system Python and venv Python</li>
+          <li>Performance limits on heavier workloads</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>How I Debugged It</h2>
+        <ol>
+          <li>Confirmed active Python interpreter and PATH</li>
+          <li>Validated virtual environment activation</li>
+          <li>Checked installed packages and versions</li>
+          <li>Rebuilt environments when state was ambiguous</li>
+          <li>Documented steps to ensure repeatability</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Current State</h2>
+        <p>
+          The sandbox is stable and used regularly for Python development and
+          troubleshooting practice. It serves as a safe test platform for learning
+          without risking system-wide configuration issues.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Next Steps</h2>
+        <ul>
+          <li>Add a C++ build and test workflow</li>
+          <li>Introduce Rust tooling alongside Python</li>
+          <li>Expand automation within the setup script</li>
+          <li>Document recovery steps as a support runbook</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+  <div class="container">
+    <h2>Code & Artifacts</h2>
+
+    <ul>
+      <li>
+        <strong>setup.sh</strong> —
+        <a href="assets/code/setup.sh">View raw file</a>
+      </li>
+    </ul>
+
+    <h3>setup.sh (Inline)</h3>
+    <p class="muted">
+      This script automates initial Raspberry Pi sandbox setup: installs dependencies,
+      creates directories, and initializes a Python virtual environment. (Paste your
+      exact script below.)
+    </p>
+
+    <pre><code>
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Print the absolute path of this script
+realpath "$0"
+
+# Configuration
+SANDBOX_ROOT="/home/raspberry/sandbox"
+VENV_DIR="$SANDBOX_ROOT/venv"
+BOOTSTRAP_SH="$SANDBOX_ROOT/bootstrap.sh"
+BASHRC="/home/raspberry/.bashrc"
+
+# Update system packages
+sudo apt-get update
+sudo apt-get -y upgrade
+
+# Install required packages
+sudo apt-get install -y \
+  python3 python3-pip python3-venv \
+  git tmux screen \
+  build-essential minicom
+
+# Create sandbox directory structure
+mkdir -p "$SANDBOX_ROOT"/{venv,experiments,esp_tools,protocols,tests,logs}
+
+# Create Python virtual environment if missing
+if [ ! -d "$VENV_DIR" ]; then
+  python3 -m venv "$VENV_DIR"
+fi
+
+# Install Python packages into the venv
+"$VENV_DIR/bin/pip" install --upgrade pip
+"$VENV_DIR/bin/pip" install pyserial esptool requests flask rich click
+
+# Create bootstrap script to activate the venv
+cat <<'BOOTSTRAP' > "$BOOTSTRAP_SH"
+#!/usr/bin/env bash
+# Safe to source multiple times
+if [ -n "${VIRTUAL_ENV:-}" ] && [ "$VIRTUAL_ENV" = "/home/raspberry/sandbox/venv" ]; then
+  return 0 2>/dev/null || exit 0
+fi
+
+source "/home/raspberry/sandbox/venv/bin/activate"
+python --version
+printf "Sandbox path: %s\n" "/home/raspberry/sandbox"
+BOOTSTRAP
+
+chmod +x "$BOOTSTRAP_SH"
+
+# Ensure .bashrc auto-activates sandbox for interactive shells only
+if ! grep -q "sandbox/bootstrap.sh" "$BASHRC"; then
+  cat <<'BASHRC_SNIPPET' >> "$BASHRC"
+
+# Auto-activate Raspberry Pi sandbox for interactive shells
+if [[ $- == *i* ]]; then
+  if [ -f "/home/raspberry/sandbox/bootstrap.sh" ]; then
+    source "/home/raspberry/sandbox/bootstrap.sh"
+  fi
+fi
+BASHRC_SNIPPET
+fi
+
+# Add user to dialout group for serial access
+sudo usermod -aG dialout raspberry
+
+# Reboot reminder
+printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to take effect.\n"
+
+    </code></pre>
+  </div>
+</section>
+
+    <!-- ===================================================== -->
+    <!-- PROJECT TEMPLATE (ANNOTATED – COPY OR UNCOMMENT LATER) -->
+    <!-- ===================================================== -->
+
+    <!--
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">Project</p>
+        <h1 class="headline">[PROJECT TITLE]</h1>
+        <p class="summary">[Short description of the project]</p>
+
+        <dl class="meta">
+          <div class="meta-row">
+            <dt>Role</dt>
+            <dd>[Your role]</dd>
+          </div>
+          <div class="meta-row">
+            <dt>Tools</dt>
+            <dd>[Tools used]</dd>
+          </div>
+          <div class="meta-row">
+            <dt>Status</dt>
+            <dd>[Current status]</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
+        <p>[What problem this project addresses]</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Constraints</h2>
+        <ul>
+          <li>[Constraint]</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>System Overview</h2>
+        <p>[High-level system description]</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Code & Artifacts</h2>
+        <ul>
+          <li><strong>[script.sh]</strong> — [What the script does]</li>
+          <li>[Additional artifacts]</li>
+        </ul>
+      </div>
+    </section>
+    -->
   </main>
 
   <footer class="site-footer">
