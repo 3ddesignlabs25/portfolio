@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume | Michael Butler</title>
+  <meta name="description" content="Resume for Michael Butler, technical support and systems-focused engineering student." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true">MB</span>
+        <span class="brand-text">
+          <span class="brand-name">Michael Butler</span>
+          <span class="brand-sub">Technical Support • Systems</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="troubleshooting.html">Troubleshooting</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">Resume</p>
+
+        <h1 class="headline">Michael Butler</h1>
+
+        <p class="summary">
+          Technical support and systems-focused engineering student with hands-on
+          experience troubleshooting hardware, software, and embedded systems.
+          Actively seeking an entry-level help desk or technical support role.
+        </p>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section">
+      <div class="container">
+        <h2>Education</h2>
+
+        <p>
+          <strong>Mt. San Jacinto College (MSJC)</strong><br />
+          Engineering — Robotics Transfer Pathway<br />
+          First-Year Student
+        </p>
+      </div>
+    </section>
+
+    <!-- Objective -->
+    <section class="section">
+      <div class="container">
+        <h2>Objective</h2>
+
+        <p>
+          First-year engineering student seeking an entry-level technical support or
+          help desk position to gain real-world experience troubleshooting systems,
+          supporting users, and learning professional IT workflows in a mentorship-
+          driven environment.
+        </p>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section">
+      <div class="container">
+        <h2>Technical Skills</h2>
+
+        <h3>Systems & Troubleshooting</h3>
+        <ul>
+          <li>Hardware and software issue diagnosis</li>
+          <li>Hypothesis-driven testing</li>
+          <li>Validation and verification workflows</li>
+          <li>Comfort working from documentation and logs</li>
+        </ul>
+
+        <h3>Operating Systems & Tools</h3>
+        <ul>
+          <li>Linux (Raspberry Pi, terminal usage, file systems)</li>
+          <li>Windows and macOS (daily use and basic troubleshooting)</li>
+          <li>SSH, virtual environments, package management</li>
+          <li>VS Code, Git, GitHub</li>
+        </ul>
+
+        <h3>Embedded & Programming</h3>
+        <ul>
+          <li>Arduino, ESP32, ESP32-C6</li>
+          <li>C / C++ and Python (basic to intermediate)</li>
+          <li>GPIO setup, timers, serial debugging</li>
+        </ul>
+
+        <h3>Hardware & Mechanical</h3>
+        <ul>
+          <li>Breadboarding and hand soldering</li>
+          <li>Sensors, LEDs, component wiring</li>
+          <li>Basic CAD and FDM 3D printing (PLA, PETG, TPU)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Highlighted Project -->
+    <section class="section">
+      <div class="container">
+        <h2>Highlighted Project</h2>
+
+        <h3>Wi-Fi Alarm & Task Management System</h3>
+        <ul>
+          <li>Multi-microcontroller system using Arduino and ESP32</li>
+          <li>Arduino handled timing logic and direct hardware I/O</li>
+          <li>ESP32 managed Wi-Fi connectivity and task features</li>
+          <li>Debugged issues using serial output, testing, and validation</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Currently Learning -->
+    <section class="section">
+      <div class="container">
+        <h2>Currently Learning</h2>
+        <ul>
+          <li>Motor control fundamentals (DC motors, PWM, drivers)</li>
+          <li>Robotics and systems integration</li>
+          <li>Improving embedded reliability through practice and coursework</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Strengths -->
+    <section class="section">
+      <div class="container">
+        <h2>Strengths</h2>
+        <ul>
+          <li>Methodical troubleshooting approach</li>
+          <li>Patient and curious learner</li>
+          <li>Honest about skill gaps</li>
+          <li>Comfortable learning through documentation and verification</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted">© <span id="year"></span> Michael Butler. Built for clarity and support roles.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
