@@ -78,29 +78,50 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Constraints</h2>
-        <ul>
-          <li>Limited hardware resources (Raspberry Pi Zero 2 W)</li>
-          <li>Must be operable entirely over SSH</li>
-          <li>Environments must be disposable and rebuildable</li>
-          <li>No reliance on primary development machines</li>
-        </ul>
-      </div>
-    </section>
+   <section class="section">
+  <div class="container">
+    <h2>Constraints</h2>
+    <ul>
+      <li>Limited hardware resources on the Raspberry Pi Zero 2 W, requiring efficient tooling and lightweight workflows</li>
+      <li>System must support both local hardware testing and external device deployment without cross-interference</li>
+      <li>All development and testing must be operable from a terminal-first environment</li>
+      <li>Environments must be disposable, reproducible, and recoverable through scripting</li>
+      <li>Hardware testing (servos, LEDs, peripherals) must be isolated from target deployment devices</li>
+      <li>The system must remain portable and self-contained, supporting an eventual cyberdeck form factor</li>
+    </ul>
+  </div>
+</section>
 
-    <section class="section">
-      <div class="container">
-        <h2>System Overview</h2>
-        <p>
-          The system runs Raspberry Pi OS with a structured directory layout.
-          Python virtual environments isolate projects, while Git handles version
-          control. A shell-based setup script automates initial configuration,
-          package installation, and environment creation.
-        </p>
-      </div>
-    </section>
+   <section class="section">
+  <div class="container">
+    <h2>System Overview</h2>
+    <p>
+      The system is built around a Raspberry Pi acting as the primary host,
+      development environment, and deployment controller. The Pi runs a structured
+      Linux-based workspace where Python virtual environments, build tools, and
+      scripts are used to develop and test code in a controlled manner.
+    </p>
+    <p>
+      An ESP32-C6 with a 1.47-inch LCD is integrated as a local hardware test
+      interface. This built-in microcontroller is used to execute scripts, drive
+      servos and LEDs, and provide immediate visual feedback without risking
+      external devices. It functions as a safe, always-available test target.
+    </p>
+    <p>
+      The Raspberry Pi is also responsible for flashing and deploying code to
+      external target ESP devices. This separation allows the built-in ESP32-C6
+      to be used for validation and diagnostics while the Pi handles programming
+      and verification of additional hardware.
+    </p>
+    <p>
+      Together, this architecture supports multi-language development (Python,
+      C/C++, and Rust), emphasizes fault isolation, and mirrors real-world
+      troubleshooting and deployment workflows commonly used in technical support
+      and embedded systems environments.
+    </p>
+  </div>
+</section>
+
 
     <section class="section">
       <div class="container">
