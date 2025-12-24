@@ -78,46 +78,47 @@
       </div>
     </section>
 
-   <section class="section">
+  <section class="section">
   <div class="container">
     <h2>Constraints</h2>
     <ul>
-      <li>Limited hardware resources on the Raspberry Pi Zero 2 W, requiring efficient tooling and lightweight workflows</li>
-      <li>System must support both local hardware testing and external device deployment without cross-interference</li>
-      <li>All development and testing must be operable from a terminal-first environment</li>
-      <li>Environments must be disposable, reproducible, and recoverable through scripting</li>
-      <li>Hardware testing (servos, LEDs, peripherals) must be isolated from target deployment devices</li>
-      <li>The system must remain portable and self-contained, supporting an eventual cyberdeck form factor</li>
+      <li>Current implementation is limited to a single Raspberry Pi system without external microcontroller integration</li>
+      <li>Hardware resources are constrained by the Raspberry Pi Zero 2 W, requiring lightweight tooling and careful resource use</li>
+      <li>All development and testing must be performed in a terminal-based Linux environment</li>
+      <li>Python environments must be isolated to avoid system-level dependency conflicts</li>
+      <li>The system must remain simple enough to rebuild quickly when configurations break</li>
+      <li>Future expansion must not require reworking the existing sandbox foundation</li>
     </ul>
   </div>
 </section>
+
 
    <section class="section">
   <div class="container">
     <h2>System Overview</h2>
     <p>
-      The system is built around a Raspberry Pi acting as the primary host,
-      development environment, and deployment controller. The Pi runs a structured
-      Linux-based workspace where Python virtual environments, build tools, and
-      scripts are used to develop and test code in a controlled manner.
+      The current system consists of a single Raspberry Pi configured as a
+      self-contained Python development sandbox. The Pi runs Raspberry Pi OS
+      and serves as a dedicated environment for writing, testing, and debugging
+      Python scripts without impacting other machines.
     </p>
     <p>
-      An ESP32-C6 with a 1.47-inch LCD is integrated as a local hardware test
-      interface. This built-in microcontroller is used to execute scripts, drive
-      servos and LEDs, and provide immediate visual feedback without risking
-      external devices. It functions as a safe, always-available test target.
+      Python virtual environments are used to isolate dependencies and prevent
+      conflicts between projects. Development is performed primarily through the
+      terminal using SSH, mirroring workflows commonly found in technical support
+      and system administration roles.
     </p>
     <p>
-      The Raspberry Pi is also responsible for flashing and deploying code to
-      external target ESP devices. This separation allows the built-in ESP32-C6
-      to be used for validation and diagnostics while the Pi handles programming
-      and verification of additional hardware.
+      A shell-based setup script is used to automate system configuration,
+      dependency installation, and environment initialization. This allows the
+      sandbox to be rebuilt quickly if the system becomes misconfigured or
+      unstable.
     </p>
     <p>
-      Together, this architecture supports multi-language development (Python,
-      C/C++, and Rust), emphasizes fault isolation, and mirrors real-world
-      troubleshooting and deployment workflows commonly used in technical support
-      and embedded systems environments.
+      At this stage, the system does not include integrated displays, input
+      devices, or external microcontroller targets. The focus is on establishing
+      a reliable, reproducible foundation before layering additional hardware
+      and functionality.
     </p>
   </div>
 </section>
