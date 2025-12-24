@@ -23,7 +23,6 @@
 
       <nav class="nav" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/about.html">About</a>
         <a href="/projects.html">Projects</a>
         <a href="/troubleshooting.html">Troubleshooting</a>
         <a href="/resume.html">Resume</a>
@@ -38,7 +37,7 @@
       <div class="container">
         <h2>Contents</h2>
         <ul>
-          <li><a href="#overview">Overview</a></li>
+          <li><a href="#home">Home</a></li>
           <li><a href="#problem">Problem</a></li>
           <li><a href="#constraints">Constraints</a></li>
           <li><a href="#system-overview">System Overview</a></li>
@@ -52,16 +51,17 @@
       </div>
     </section>
 
-    <!-- Hero / Overview -->
-    <section id="overview" class="hero">
+    <!-- Home (merged Home + About) -->
+    <section id="home" class="hero">
       <div class="container">
-        <p class="kicker">Project</p>
+        <p class="kicker">Project Home</p>
 
         <h1 class="headline">[INSERT PROJECT TITLE]</h1>
 
         <p class="summary">
-          [One-sentence explanation of what this project is and why it matters in a
-          technical support / systems context.]
+          [One-sentence explanation of what this project is, why it exists,
+          and how it demonstrates troubleshooting, systems thinking,
+          or technical support skills.]
         </p>
 
         <dl class="meta">
@@ -78,6 +78,12 @@
             <dd>[INSERT STATUS]</dd>
           </div>
         </dl>
+
+        <p>
+          This page serves as the single source of truth for the project,
+          combining background context and current state into one
+          easy-to-scan starting point.
+        </p>
       </div>
     </section>
 
@@ -86,9 +92,9 @@
       <div class="container">
         <h2>Problem</h2>
         <p>
-          The primary issue addressed in this project was a repeatable system or workflow
-          failure that impacted reliability, usability, or troubleshooting clarity.
-          The goal was to identify root causes rather than apply temporary fixes.
+          The primary issue addressed in this project was a repeatable system
+          or workflow failure that impacted reliability, usability,
+          or troubleshooting clarity.
         </p>
       </div>
     </section>
@@ -99,8 +105,8 @@
         <h2>Constraints</h2>
         <ul>
           <li>Limited hardware or test environment availability</li>
-          <li>Time constraints requiring methodical, documented steps</li>
-          <li>Need to preserve existing system behavior while diagnosing issues</li>
+          <li>Time constraints requiring structured diagnostics</li>
+          <li>Need to avoid breaking existing functionality</li>
         </ul>
       </div>
     </section>
@@ -110,9 +116,8 @@
       <div class="container">
         <h2>System Overview</h2>
         <p>
-          The system consisted of interconnected components that required isolation and
-          verification. Each layer was tested independently to confirm assumptions before
-          proceeding to the next step.
+          The system was broken into logical components and verified
+          independently to isolate failure points and confirm assumptions.
         </p>
       </div>
     </section>
@@ -122,21 +127,21 @@
       <div class="container">
         <h2>What Worked</h2>
         <ul>
-          <li>Breaking the problem into smaller, testable components</li>
-          <li>Logging outcomes at each step to avoid repeated mistakes</li>
-          <li>Verifying fixes by reproducing the original issue</li>
+          <li>Documenting each troubleshooting step</li>
+          <li>Testing one variable at a time</li>
+          <li>Reproducing the issue before and after fixes</li>
         </ul>
       </div>
     </section>
 
-    <!-- What Didn't -->
+    <!-- What Didn’t -->
     <section id="what-didnt" class="section">
       <div class="container">
         <h2>What Didn’t</h2>
         <ul>
           <li>Assuming default configurations were correct</li>
-          <li>Skipping documentation during early testing</li>
-          <li>Changing multiple variables at once</li>
+          <li>Skipping baseline verification</li>
+          <li>Changing multiple components simultaneously</li>
         </ul>
       </div>
     </section>
@@ -146,11 +151,11 @@
       <div class="container">
         <h2>How I Debugged It</h2>
         <ol>
-          <li>Reproduced the issue consistently to establish a baseline</li>
-          <li>Isolated individual components and tested them independently</li>
-          <li>Reviewed logs, configurations, and expected behavior</li>
-          <li>Applied a targeted fix and verified results</li>
-          <li>Documented the final resolution for repeatability</li>
+          <li>Confirmed the issue could be reproduced consistently</li>
+          <li>Isolated individual components and tested them separately</li>
+          <li>Reviewed logs, configs, and expected behavior</li>
+          <li>Applied a focused fix and re-tested</li>
+          <li>Documented the final resolution</li>
         </ol>
       </div>
     </section>
@@ -160,8 +165,8 @@
       <div class="container">
         <h2>Current State</h2>
         <p>
-          The system is currently stable and behaves as expected under normal use.
-          Remaining issues are documented and non-blocking.
+          The system is stable and functioning as intended,
+          with known limitations documented for future work.
         </p>
       </div>
     </section>
@@ -171,9 +176,9 @@
       <div class="container">
         <h2>Next Steps</h2>
         <ul>
-          <li>Add additional monitoring or logging</li>
-          <li>Refine documentation for faster future troubleshooting</li>
-          <li>Test under edge-case scenarios</li>
+          <li>Add additional validation and edge-case testing</li>
+          <li>Improve documentation clarity</li>
+          <li>Automate repeatable checks where possible</li>
         </ul>
       </div>
     </section>
@@ -202,3 +207,4 @@
   </script>
 </body>
 </html>
+
