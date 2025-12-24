@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Troubleshooting | Michael Butler</title>
+  <meta name="description" content="Help-desk-focused troubleshooting case studies documenting problem diagnosis, testing steps, and resolutions." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark" aria-hidden="true">MB</span>
+        <span class="brand-text">
+          <span class="brand-name">Michael Butler</span>
+          <span class="brand-sub">Technical Support • Systems</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="troubleshooting.html">Troubleshooting</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">Troubleshooting</p>
+
+        <h1 class="headline">Problem Diagnosis & Resolution</h1>
+
+        <p class="summary">
+          This page documents real troubleshooting scenarios across hardware, software,
+          and systems environments. Each case focuses on symptoms, isolation steps,
+          testing, and verified outcomes—mirroring how issues are handled in technical
+          support and IT roles.
+        </p>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="section">
+      <div class="container">
+        <h2>Broken Python Virtual Environment (Raspberry Pi)</h2>
+
+        <h3>Problem</h3>
+        <p>
+          A Python application failed to start after a system update, reporting missing
+          modules despite being previously functional.
+        </p>
+
+        <h3>Symptoms</h3>
+        <ul>
+          <li>ImportError messages at launch</li>
+          <li>Application worked on a different machine</li>
+          <li>No recent code changes</li>
+        </ul>
+
+        <h3>Diagnosis</h3>
+        <ul>
+          <li>Checked active Python version</li>
+          <li>Verified virtual environment path</li>
+          <li>Reviewed installed packages inside the environment</li>
+        </ul>
+
+        <h3>Resolution</h3>
+        <p>
+          Recreated the virtual environment, reinstalled dependencies from a requirements
+          file, and verified execution using a clean shell session.
+        </p>
+
+        <h3>Lesson Learned</h3>
+        <p>
+          System updates can invalidate environments; maintaining reproducible setups
+          prevents prolonged downtime.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted">© <span id="year"></span> Michael Butler. Built for clarity and support roles.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
