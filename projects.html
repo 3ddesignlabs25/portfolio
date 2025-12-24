@@ -162,144 +162,73 @@
     </section>
 
     <section class="section">
-  <div class="container">
-    <h2>Code & Artifacts</h2>
+      <div class="container">
+        <h2>End Goal</h2>
+        <p>
+          The long-term goal is to evolve this sandbox into a self-contained
+          Raspberry Pi–based coding cyberdeck with an integrated keyboard and display.
+          The system will function as a portable development workstation capable of
+          running multiple programming languages directly from the terminal.
+        </p>
+        <p>
+          This end state emphasizes portability, environment control, and rapid
+          iteration, while reinforcing Linux administration, scripting, and
+          multi-language development workflows.
+        </p>
+      </div>
+    </section>
 
-    <ul>
-      <li>
-        <strong>setup.sh</strong> —
-        <a href="assets/code/pi-py-sandbox-setup.sh">View raw file</a>
-      </li>
-    </ul>
+    <section class="section">
+      <div class="container">
+        <h2>Code & Artifacts</h2>
 
-    <h3>setup.sh (Inline)</h3>
-    <p class="muted">
-      This script automates initial Raspberry Pi sandbox setup: installs dependencies,
-      creates directories, and initializes a Python virtual environment. (Paste your
-      exact script below.)
-    </p>
+        <ul>
+          <li>
+            <strong>setup.sh</strong> —
+            <a href="assets/code/pi-py-sandbox-setup.sh">View raw file</a>
+          </li>
+        </ul>
 
-    <pre><code>
+        <h3>setup.sh (Inline)</h3>
+        <p class="muted">
+          Bash script used to automate Raspberry Pi sandbox setup, dependency
+          installation, and Python environment initialization.
+        </p>
+
+        <pre><code>
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Print the absolute path of this script
-realpath "$0"
-
-# Configuration
 SANDBOX_ROOT="/home/raspberry/sandbox"
 VENV_DIR="$SANDBOX_ROOT/venv"
-BOOTSTRAP_SH="$SANDBOX_ROOT/bootstrap.sh"
-BASHRC="/home/raspberry/.bashrc"
 
-# Update system packages
 sudo apt-get update
 sudo apt-get -y upgrade
 
-# Install required packages
-sudo apt-get install -y \
-  python3 python3-pip python3-venv \
-  git tmux screen \
-  build-essential minicom
+sudo apt-get install -y python3 python3-pip python3-venv git tmux build-essential
 
-# Create sandbox directory structure
-mkdir -p "$SANDBOX_ROOT"/{venv,experiments,esp_tools,protocols,tests,logs}
+mkdir -p "$SANDBOX_ROOT"/{venv,experiments,logs}
 
-# Create Python virtual environment if missing
-if [ ! -d "$VENV_DIR" ]; then
-  python3 -m venv "$VENV_DIR"
-fi
+python3 -m venv "$VENV_DIR"
+"$VENV_DIR/bin/pip" install --upgrade pip pyserial requests flask
 
-# Install Python packages into the venv
-"$VENV_DIR/bin/pip" install --upgrade pip
-"$VENV_DIR/bin/pip" install pyserial esptool requests flask rich click
-
-# Create bootstrap script to activate the venv
-cat <<'BOOTSTRAP' > "$BOOTSTRAP_SH"
-#!/usr/bin/env bash
-# Safe to source multiple times
-if [ -n "${VIRTUAL_ENV:-}" ] && [ "$VIRTUAL_ENV" = "/home/raspberry/sandbox/venv" ]; then
-  return 0 2>/dev/null || exit 0
-fi
-
-source "/home/raspberry/sandbox/venv/bin/activate"
-python --version
-printf "Sandbox path: %s\n" "/home/raspberry/sandbox"
-BOOTSTRAP
-
-chmod +x "$BOOTSTRAP_SH"
-
-# Ensure .bashrc auto-activates sandbox for interactive shells only
-if ! grep -q "sandbox/bootstrap.sh" "$BASHRC"; then
-  cat <<'BASHRC_SNIPPET' >> "$BASHRC"
-
-# Auto-activate Raspberry Pi sandbox for interactive shells
-if [[ $- == *i* ]]; then
-  if [ -f "/home/raspberry/sandbox/bootstrap.sh" ]; then
-    source "/home/raspberry/sandbox/bootstrap.sh"
-  fi
-fi
-BASHRC_SNIPPET
-fi
-
-# Add user to dialout group for serial access
-sudo usermod -aG dialout raspberry
-
-# Reboot reminder
-printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to take effect.\n"
-
-    </code></pre>
-  </div>
-</section>
+echo "Sandbox setup complete."
+        </code></pre>
+      </div>
+    </section>
 
     <!-- ===================================================== -->
     <!-- PROJECT TEMPLATE (ANNOTATED – COPY OR UNCOMMENT LATER) -->
     <!-- ===================================================== -->
 
     <!--
-    <section class="hero">
-      <div class="container">
-        <p class="kicker">Project</p>
-        <h1 class="headline">[PROJECT TITLE]</h1>
-        <p class="summary">[Short description of the project]</p>
-
-        <dl class="meta">
-          <div class="meta-row">
-            <dt>Role</dt>
-            <dd>[Your role]</dd>
-          </div>
-          <div class="meta-row">
-            <dt>Tools</dt>
-            <dd>[Tools used]</dd>
-          </div>
-          <div class="meta-row">
-            <dt>Status</dt>
-            <dd>[Current status]</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-
     <section class="section">
       <div class="container">
-        <h2>Problem</h2>
-        <p>[What problem this project addresses]</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Constraints</h2>
-        <ul>
-          <li>[Constraint]</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>System Overview</h2>
-        <p>[High-level system description]</p>
+        <h2>End Goal</h2>
+        <p>
+          [Describe the intended final form of the project. Focus on system-level
+          capability, portability, or operational use.]
+        </p>
       </div>
     </section>
 
@@ -308,8 +237,10 @@ printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to ta
         <h2>Code & Artifacts</h2>
         <ul>
           <li><strong>[script.sh]</strong> — [What the script does]</li>
-          <li>[Additional artifacts]</li>
         </ul>
+        <pre><code>
+# Paste code here
+        </code></pre>
       </div>
     </section>
     -->
@@ -326,3 +257,4 @@ printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to ta
   </script>
 </body>
 </html>
+
