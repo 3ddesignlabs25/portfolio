@@ -53,40 +53,189 @@
       <div class="container">
         <h2>Broken Python Virtual Environment (Raspberry Pi)</h2>
 
-        <h3>Problem</h3>
-        <p>
-          A Python application failed to start after a system update, reporting missing
-          modules despite being previously functional.
-        </p>
+       <section class="section">
+  <div class="container">
+    <h2>Problem</h2>
+    <p>
+      While working in a Raspberry Pi–based Python environment, I began encountering
+      failures in scripts that had previously run without issue. These failures did
+      not follow a clear pattern and often appeared after unrelated changes, such as
+      installing new packages or restarting the system.
+    </p>
+    <p>
+      At the time, it was not obvious what the root cause was. Error messages pointed
+      to missing modules or import failures, but it was unclear whether the issue was
+      caused by my code, the Python environment, or underlying system changes. In some
+      cases, attempting one fix would appear to help, only for a different error to
+      surface later.
+    </p>
+    <p>
+      Debugging initially involved a degree of trial and error, driven by curiosity
+      and testing assumptions rather than a complete understanding of what was
+      happening internally. Through experimenting with environment activation,
+      rebuilding virtual environments, and observing changes in behavior, patterns
+      gradually became more visible.
+    </p>
+    <p>
+      The objective became less about immediately identifying a precise root cause
+      and more about restoring a predictable working environment while learning how
+      different configuration changes affected execution. This experience highlighted
+      the importance of isolation, documentation, and controlled experimentation when
+      troubleshooting system-level issues.
+    </p>
+  </div>
+</section>
 
-        <h3>Symptoms</h3>
-        <ul>
-          <li>ImportError messages at launch</li>
-          <li>Application worked on a different machine</li>
-          <li>No recent code changes</li>
-        </ul>
 
-        <h3>Diagnosis</h3>
-        <ul>
-          <li>Checked active Python version</li>
-          <li>Verified virtual environment path</li>
-          <li>Reviewed installed packages inside the environment</li>
-        </ul>
 
-        <h3>Resolution</h3>
-        <p>
-          Recreated the virtual environment, reinstalled dependencies from a requirements
-          file, and verified execution using a clean shell session.
-        </p>
+       <section class="section">
+  <div class="container">
+    <h2>Symptoms</h2>
+    <ul>
+      <li>
+        Python scripts that had previously executed successfully began failing
+        without any changes to the script files themselves.
+      </li>
+      <li>
+        Import-related errors appeared intermittently, often indicating that
+        modules were missing even though they had been installed earlier.
+      </li>
+      <li>
+        Running the same script produced different results depending on how the
+        session was started (new terminal session, SSH reconnect, or reboot).
+      </li>
+      <li>
+        Activating the Python virtual environment appeared to succeed, but behavior
+        suggested the system Python interpreter was sometimes still being used.
+      </li>
+      <li>
+        Some issues temporarily resolved after rebuilding the environment or
+        reinstalling packages, only to reappear later after additional changes.
+      </li>
+      <li>
+        Error output was inconsistent and not always immediately actionable,
+        making it difficult to distinguish between code issues and environment
+        configuration problems.
+      </li>
+    </ul>
+  </div>
+</section>
 
-        <h3>Lesson Learned</h3>
-        <p>
-          System updates can invalidate environments; maintaining reproducible setups
-          prevents prolonged downtime.
-        </p>
-      </div>
-    </section>
-  </main>
+        <section class="section">
+  <div class="container">
+    <h2>Diagnosis</h2>
+    <p>
+      Initial diagnosis focused on verifying whether the issue originated from
+      outdated or mismatched dependencies. All installed Python packages within
+      the virtual environment were reviewed and updated, and system packages were
+      brought up to date to rule out known incompatibilities.
+    </p>
+    <p>
+      When updating dependencies did not resolve the issue, the Python virtual
+      environment was fully removed and recreated. This was done to eliminate the
+      possibility of partial installs, corrupted state, or conflicts caused by
+      previous experimentation.
+    </p>
+    <p>
+      After environment resets failed to produce consistent results, attention
+      shifted to the application code itself. Individual scripts were reviewed,
+      modified, and in some cases temporarily removed to determine whether logic
+      errors or import behavior within the codebase were contributing to the
+      failures.
+    </p>
+    <p>
+      As inconsistencies persisted, broader system-level troubleshooting was
+      attempted. The Raspberry Pi was reimaged with a fresh operating system
+      install, and the sandbox was rebuilt from scratch to establish a known
+      baseline state.
+    </p>
+    <p>
+      During this process, the setup script used to configure the environment was
+      also examined and edited to check for mistakes, incomplete commands, or
+      unexpected behavior that could have caused dependencies to install or
+      configure incorrectly.
+    </p>
+    <p>
+      Despite these efforts, the exact cause remained unclear. At this stage, the
+      issue was escalated by seeking external input, which helped clarify how
+      environment activation and interpreter selection were affecting execution.
+      With this guidance, the problem became easier to isolate and resolve.
+    </p>
+  </div>
+</section>
+
+
+       <section class="section">
+  <div class="container">
+    <h2>Resolution</h2>
+    <p>
+      The issue was ultimately stabilized by reestablishing a clean and predictable
+      execution environment rather than identifying a single isolated failure.
+      After reviewing interpreter paths and environment activation behavior, it
+      became clear that inconsistent use of the system Python interpreter versus
+      the virtual environment was contributing to the observed issues.
+    </p>
+    <p>
+      A fresh Python virtual environment was created and verified explicitly by
+      checking interpreter paths before running any scripts. Dependencies were
+      reinstalled in a controlled order, and scripts were tested incrementally to
+      confirm expected behavior at each step.
+    </p>
+    <p>
+      The setup script was adjusted to ensure environment creation and activation
+      steps were explicit and repeatable. This reduced ambiguity around which
+      interpreter and package set were being used during execution.
+    </p>
+    <p>
+      Once the environment was rebuilt and validated, script failures stopped
+      occurring intermittently and behavior became consistent across sessions,
+      reboots, and SSH connections. While the exact trigger that caused the initial
+      instability could not be conclusively identified, enforcing stricter
+      environment isolation and verification resolved the practical impact of the
+      issue.
+    </p>
+    <p>
+      The resolution reinforced the importance of treating environment state as a
+      first-class component of troubleshooting, particularly when working across
+      multiple tools, sessions, and system updates.
+    </p>
+  </div>
+</section>
+
+       <section class="section">
+  <div class="container">
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li>
+        <strong>Environment isolation applies across languages.</strong><br />
+        The same principles used to stabilize Python environments can be applied to
+        other languages and toolchains. This reinforced that controlled setup,
+        isolation, and rebuildability are transferable skills rather than Python-
+        specific solutions.
+      </li>
+      <li>
+        <strong>Tooling must match the interpreter or runtime.</strong><br />
+        Installing packages, libraries, or tools without confirming they align with
+        the active interpreter or runtime leads to subtle and difficult-to-diagnose
+        failures. Dependencies must be installed intentionally for the environment
+        that will actually execute the code.
+      </li>
+      <li>
+        <strong>Mismatched environments cause silent breakage.</strong><br />
+        Systems do not always fail loudly when components are misaligned. Scripts may
+        partially work or fail inconsistently, making verification of execution
+        context just as important as code correctness.
+      </li>
+      <li>
+        <strong>Stability comes from discipline, not complexity.</strong><br />
+        The most effective improvements came from simplifying workflows, validating
+        assumptions, and rebuilding cleanly rather than layering additional fixes on
+        top of an unstable system.
+      </li>
+    </ul>
+  </div>
+</section>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
