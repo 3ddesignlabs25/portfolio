@@ -48,9 +48,7 @@
       </div>
     </section>
 
-    <!-- ===================================================== -->
-    <!-- CASE STUDY 01 (Existing): Broken Python Virtual Environment -->
-    <!-- ===================================================== -->
+    <!-- Case Study -->
     <section class="section">
       <div class="container">
         <h2>Broken Python Virtual Environment (Raspberry Pi)</h2>
@@ -237,146 +235,197 @@
       </div>
     </section>
 
-    <!-- ===================================================== -->
-    <!-- CASE STUDY 02 (New): CyberPie Field Node -->
-    <!-- ===================================================== -->
+    <!-- Case Study -->
     <section class="section">
       <div class="container">
-        <h2>CyberPie Field Node: Network Bring-Up & Service Stability (Pi Zero 2 W)</h2>
+        <h2>CyberPie Field Node: Network Bring-Up & Service Reliability (Pi Zero 2 W)</h2>
+      </div>
+    </section>
 
-        <h3>Problem</h3>
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
         <p>
           While building CyberPie as a service-first field node, I ran into reliability issues during initial setup:
-          the device couldn’t reliably get internet access for updates and installs, and service startup behavior
-          wasn’t consistent after reboots. The goal was to reach a predictable “boot → network → services” flow.
+          the device couldn’t consistently get internet access for updates and installs, and startup behavior wasn’t
+          predictable after reboots. The goal was a repeatable “boot → network → services” flow.
         </p>
+      </div>
+    </section>
 
-        <h3>Symptoms</h3>
+    <section class="section">
+      <div class="container">
+        <h2>Symptoms</h2>
         <ul>
-          <li>No internet on first boot / after config changes</li>
-          <li>Missing common DHCP tooling (depending on image/minimal install)</li>
-          <li>Interface present but not acquiring an IP lease</li>
-          <li>Services failing on boot because networking wasn’t ready yet</li>
-        </ul>
-
-        <h3>Diagnosis</h3>
-        <p>
-          I treated it like a help desk escalation: confirm link state, confirm interface config, confirm DHCP client
-          availability, and confirm which network stack was actually installed/enabled. When tooling wasn’t present,
-          the root cause wasn’t “DHCP is broken,” it was “the expected client isn’t installed / the wrong network
-          manager is active.”
-        </p>
-
-        <h3>Resolution</h3>
-        <ul>
-          <li>Verified interface state and link (bring interface up before chasing DNS)</li>
-          <li>Installed/enabled the correct DHCP/network stack for the image (minimal installs differ)</li>
-          <li>Adjusted service dependencies so UI/tool services wait for the network to be online when needed</li>
-          <li>Validated with reboot testing to ensure it wasn’t a one-time “works until restart” fix</li>
-        </ul>
-
-        <h3>Lessons Learned</h3>
-        <ul>
-          <li><strong>Assume nothing about baseline tooling.</strong> Minimal images can omit expected DHCP utilities.</li>
-          <li><strong>Fix boot order, not just commands.</strong> Service reliability comes from correct dependencies.</li>
-          <li><strong>Reboot tests are the truth serum.</strong> If it only works once, it’s not solved.</li>
+          <li>Interface present but no internet connectivity</li>
+          <li>System couldn’t obtain a DHCP lease on some boots/configurations</li>
+          <li>Expected network tooling missing on minimal images</li>
+          <li>Services failing at boot because networking wasn’t ready yet</li>
         </ul>
       </div>
     </section>
 
-    <!-- ===================================================== -->
-    <!-- CASE STUDY 03 (New): Control Node / Security Console -->
-    <!-- ===================================================== -->
     <section class="section">
       <div class="container">
-        <h2>Control Node / Security Console: OS Setup & Service Issues (Pi 5)</h2>
-
-        <h3>Problem</h3>
+        <h2>Diagnosis</h2>
         <p>
-          While configuring the Pi 5 “Security Console” control node, I encountered setup blockers that are common
-          in real IT environments: package manager interruptions, repository misconfiguration, and service naming
-          mismatches. These prevented normal updates and services (like SSH) from coming online cleanly.
+          I treated this like a support ticket: confirm link state first, confirm interface config, confirm which network
+          stack is installed/enabled, and confirm DHCP client availability. That prevented chasing DNS or “app bugs” when
+          the real issue was the underlying network tooling and startup order.
         </p>
+      </div>
+    </section>
 
-        <h3>Symptoms</h3>
+    <section class="section">
+      <div class="container">
+        <h2>Resolution</h2>
+        <ul>
+          <li>Verified interface state and link before troubleshooting higher layers</li>
+          <li>Installed/enabled the correct DHCP/network stack for the OS image in use</li>
+          <li>Adjusted service dependencies so required services wait for network readiness when appropriate</li>
+          <li>Validated the fix with multiple reboot tests to ensure it wasn’t a one-time “works until restart” outcome</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Lessons Learned</h2>
+        <ul>
+          <li><strong>Assume nothing about baseline tooling.</strong> Minimal images often omit utilities you expect.</li>
+          <li><strong>Fix boot order, not just commands.</strong> Reliability comes from correct dependencies and startup flow.</li>
+          <li><strong>Reboot tests are non-negotiable.</strong> If it only works once, it isn’t solved.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="section">
+      <div class="container">
+        <h2>Control Node / Security Console: Package Manager & Service Setup (Pi 5)</h2>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
+        <p>
+          During setup of the Pi 5 control node, installs and updates were blocked by package manager state issues and
+          service configuration mismatches. The goal was to restore a clean update path and enable core services reliably
+          (e.g., SSH) in a way that survives reboots.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Symptoms</h2>
         <ul>
           <li>Package installs failing due to interrupted dpkg state</li>
-          <li>Update errors caused by stale / incorrect repository sources</li>
-          <li>Service enable commands failing because unit names didn’t match the OS’s service naming</li>
-        </ul>
-
-        <h3>Diagnosis</h3>
-        <p>
-          The key was to stop treating it as one error. I separated it into: (1) restore package manager consistency,
-          (2) fix apt sources, then (3) verify the correct service package is installed and the unit name is correct.
-          That sequencing prevents “fixing symptoms” while the system is still in a broken state.
-        </p>
-
-        <h3>Resolution</h3>
-        <ul>
-          <li>Recovered dpkg consistency first (finish configuration before attempting more installs)</li>
-          <li>Removed/disabled invalid repository sources so updates could run securely</li>
-          <li>Installed the correct packages (e.g., OpenSSH server) and enabled the right service unit</li>
-          <li>Re-tested after reboot to confirm persistence</li>
-        </ul>
-
-        <h3>Lessons Learned</h3>
-        <ul>
-          <li><strong>Package manager health is priority zero.</strong> If dpkg/apt is inconsistent, everything else is noise.</li>
-          <li><strong>Repo configuration matters for security.</strong> “Insecure repo” warnings aren’t optional.</li>
-          <li><strong>Service names aren’t universal.</strong> Verify units and packages on the actual OS image.</li>
+          <li>Update errors caused by stale/incorrect repository sources</li>
+          <li>Service enable commands failing because unit names didn’t match the OS/service layout</li>
         </ul>
       </div>
     </section>
 
-    <!-- ===================================================== -->
-    <!-- CASE STUDY 04 (New): Home Server Hosting / Self-Hosting -->
-    <!-- ===================================================== -->
     <section class="section">
       <div class="container">
-        <h2>Home Server Hosting: Self-Hosting Websites & Reliability Hardening</h2>
-
-        <h3>Problem</h3>
+        <h2>Diagnosis</h2>
         <p>
-          While preparing to self-host this portfolio and related web projects, I needed the hosting environment to be
-          reliable, secure, and maintainable. That meant treating the server like production: consistent deploy steps,
-          predictable service behavior, and practical security measures.
+          I separated the issue into layers: (1) restore package manager consistency, (2) correct repository sources so
+          updates run securely, then (3) verify the correct packages are installed and the service unit names are accurate.
+          This avoids “fixing symptoms” while the system is still in a broken state.
         </p>
+      </div>
+    </section>
 
-        <h3>Symptoms</h3>
+    <section class="section">
+      <div class="container">
+        <h2>Resolution</h2>
         <ul>
-          <li>Site not reachable after config changes (service, firewall, or routing-related)</li>
-          <li>Permissions/ownership issues after moving files and setting up deploy workflows</li>
-          <li>Configuration drift between “it worked once” and “it survives reboots/updates”</li>
-          <li>Integration friction between static hosting (GitHub Pages) and future self-hosted services</li>
-        </ul>
-
-        <h3>Diagnosis</h3>
-        <p>
-          I approached it as layered troubleshooting: network reachability first, then service status, then logs,
-          then permissions, then configuration correctness. For every fix, I verified the change via service status
-          checks and log inspection rather than assuming the issue was resolved.
-        </p>
-
-        <h3>Resolution</h3>
-        <ul>
-          <li>Validated network access and service binding (is the server reachable, and is the service listening?)</li>
-          <li>Used service management + logs to isolate failures quickly (start/stop, enable on boot, review logs)</li>
-          <li>Standardized file permissions/ownership for web roots and deploy directories</li>
-          <li>Documented repeatable deploy steps so updates don’t become “tribal knowledge”</li>
-          <li>Separated “GitHub review mode” from “self-hosted mode” so the portfolio stays demo-friendly</li>
-        </ul>
-
-        <h3>Lessons Learned</h3>
-        <ul>
-          <li><strong>Logs are the receipt.</strong> Guessing wastes time; logs show what actually failed and why.</li>
-          <li><strong>Repeatability is a security feature.</strong> Consistent deploy steps reduce misconfig risk.</li>
-          <li><strong>Scope separation matters.</strong> Keep public demo safe; keep private services behind proper controls.</li>
+          <li>Recovered dpkg consistency first (complete configuration before attempting additional installs)</li>
+          <li>Removed/disabled invalid repository entries so updates could run securely</li>
+          <li>Installed the correct service packages and enabled the correct units</li>
+          <li>Confirmed persistence via reboot validation</li>
         </ul>
       </div>
     </section>
 
-  </main>
+    <section class="section">
+      <div class="container">
+        <h2>Lessons Learned</h2>
+        <ul>
+          <li><strong>Package manager health is priority zero.</strong> If apt/dpkg is inconsistent, everything else is noise.</li>
+          <li><strong>Repo configuration is a security control.</strong> Secure update paths matter as much as functionality.</li>
+          <li><strong>Service names aren’t universal.</strong> Always verify the actual unit and installed package.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Case Study -->
+    <section class="section">
+      <div class="container">
+        <h2>Home Server Hosting: Website Deployment & Self-Hosting Troubleshooting</h2>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
+        <p>
+          While preparing to self-host this portfolio and related web projects, I needed the environment to be reliable,
+          secure, and maintainable. That meant having repeatable deploy steps, predictable service behavior, and a clean
+          separation between “public demo mode” (GitHub Pages) and “self-hosted mode.”
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Symptoms</h2>
+        <ul>
+          <li>Site not reachable after configuration changes (service, firewall, or routing related)</li>
+          <li>Permission/ownership issues after moving files and setting up deploy workflows</li>
+          <li>Configuration drift between “it worked once” and “it survives reboots/updates”</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Diagnosis</h2>
+        <p>
+          I used a layered approach: confirm network reachability, confirm service status, inspect logs, validate file
+          permissions, and then verify configuration correctness. Every attempted fix was validated through service status
+          checks and log inspection to avoid guesswork.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Resolution</h2>
+        <ul>
+          <li>Validated network path and service binding (reachable host + listening service)</li>
+          <li>Used service management and logs to isolate failures quickly and repeatably</li>
+          <li>Standardized file permissions/ownership for web roots and deploy directories</li>
+          <li>Documented a repeatable deploy/update procedure to reduce configuration drift</li>
+          <li>Kept GitHub Pages content demo-safe while planning a separate self-hosted deployment path</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Lessons Learned</h2>
+        <ul>
+          <li><strong>Logs are the receipt.</strong> They show what actually failed and why.</li>
+          <li><strong>Repeatability is defensive.</strong> Consistent deploy steps reduce misconfig risk.</li>
+          <li><strong>Separate public and private surfaces.</strong> Demo content stays public; services stay controlled.</li>
+        </ul>
+      </div>
+    </section>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -389,4 +438,3 @@
   </script>
 </body>
 </html>
-
