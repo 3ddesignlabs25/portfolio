@@ -648,6 +648,110 @@ printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to ta
         </div>
       </section>
     </article>
+<!-- ========================= -->
+<!-- PROJECT 04: Home Server Hosting / Self-Hosting Lab -->
+<!-- ========================= -->
+<article class="project" id="home-server">
+  <section class="hero hero--project">
+    <div class="container">
+      <p class="kicker">Project</p>
+
+      <h2 class="headline">Home Server Hosting & Self-Hosting Lab</h2>
+
+      <p class="summary">
+        A hands-on home server environment used to deploy and host websites reliably, troubleshoot real
+        uptime issues, and build repeatable “dev → deploy” workflows with security-minded configuration.
+      </p>
+
+      <dl class="meta">
+        <div class="meta-row">
+          <dt>Role</dt>
+          <dd>Builder • Admin • Troubleshooter</dd>
+        </div>
+        <div class="meta-row">
+          <dt>Tools</dt>
+          <dd>Linux, SSH, systemd services, Git, web server stack, firewall basics, logs/monitoring</dd>
+        </div>
+        <div class="meta-row">
+          <dt>Status</dt>
+          <dd>Active / Iterating</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Problem</h2>
+      <p>
+        I wanted a practical environment to move from “I can build websites” to “I can run websites.”
+        That means handling deployment, uptime, configuration changes, and debugging issues when something
+        breaks — the same kind of responsibility that shows up in IT support, internal tools, and web ops work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Constraints &amp; Goal</h2>
+      <p>
+        <strong>Constraints:</strong> home lab limitations (hardware resources, network constraints, ISP realities),
+        and the need to keep public-facing surfaces safe and predictable.
+      </p>
+      <p>
+        <strong>Goal:</strong> a repeatable, documented hosting workflow where services survive reboots/updates,
+        changes are tracked, and troubleshooting is log-driven instead of guess-driven.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>System Overview</h2>
+      <p>
+        The server is used to host and test deployments for my portfolio and related web projects.
+        Work includes configuring services to start reliably, organizing web roots and permissions,
+        and maintaining a clean separation between “GitHub Pages review mode” and future self-hosted deployments.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Service reliability focus (boot order, enable-on-boot, restart policies)</li>
+        <li>Log-driven troubleshooting and verification after each change</li>
+        <li>Repeatable deployment steps (documented updates, fewer “it worked once” situations)</li>
+        <li>Permissions/ownership management for safe web root handling</li>
+        <li>Security-minded approach: reduce exposed surface area and keep demos safe</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Tech Stack</h2>
+      <ul>
+        <li>Linux server administration</li>
+        <li>SSH for remote management</li>
+        <li>systemd services + service lifecycle troubleshooting</li>
+        <li>Git-based workflow for tracking changes and deployments</li>
+        <li>Basic firewall/network validation and log inspection</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Status</h2>
+      <p>
+        Active work in progress. Current focus is reliability, clean deployment workflows, and keeping
+        everything maintainable and secure as the hosted projects expand.
+      </p>
+    </div>
+  </section>
+</article>
 
     <!-- ===================================================== -->
     <!-- PROJECT TEMPLATE (ANNOTATED – COPY OR UNCOMMENT LATER) -->
