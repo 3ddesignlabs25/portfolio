@@ -1,4 +1,5 @@
-/* styles.css */
+/* styles.css (remade, consistent + predictable cascade) */
+
 :root{
   --bg: #0b1220;
   --panel: #0f1a2e;
@@ -16,79 +17,39 @@
   --max: 1080px;
 }
 
+/* ---------- Reset-ish ---------- */
 *{ box-sizing: border-box; }
 html{ scroll-behavior: smooth; }
+
 body{
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  background: radial-gradient(1200px 700px at 20% 10%, rgba(110,231,255,.10), transparent 55%),
-              radial-gradient(900px 600px at 80% 20%, rgba(124,156,255,.10), transparent 60%),
-              var(--bg);
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(110,231,255,.10), transparent 55%),
+    radial-gradient(900px 600px at 80% 20%, rgba(124,156,255,.10), transparent 60%),
+    var(--bg);
   color: var(--text);
   line-height: 1.55;
 }
-/* ===== Page Hero (bubble + title + chips) ===== */
-.page-hero {
-  padding: 3rem 1rem 1.5rem;
-}
 
-.page-hero__inner {
-  max-width: 980px;
-  margin: 0 auto;
-}
+img{ max-width: 100%; height: auto; }
+code, pre{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-.eyebrow-pill {
-  display: inline-block;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+a{
+  color: var(--accent);
+  text-decoration: none;
 }
+a:hover{ text-decoration: underline; }
 
-.page-title {
-  margin: 0.75rem 0 0.5rem;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.1;
-}
-
-.page-subtitle {
-  margin: 0 0 1rem;
-  opacity: 0.85;
-  max-width: 70ch;
-}
-
-.meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.meta-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
-  font-size: 0.9rem;
-  opacity: 0.95;
-}
-
-.meta-chip strong {
-  opacity: 0.9;
-  font-weight: 600;
-}
-
+/* ---------- Layout ---------- */
 .container{
   width: min(var(--max), calc(100% - 40px));
   margin: 0 auto;
 }
 
+.main{ padding-bottom: 48px; }
+
+/* ---------- Accessibility ---------- */
 .skip-link{
   position: absolute;
   left: -999px;
@@ -101,6 +62,7 @@ body{
 }
 .skip-link:focus{ left: 12px; }
 
+/* ---------- Header / Nav ---------- */
 .site-header{
   position: sticky;
   top: 0;
@@ -109,6 +71,7 @@ body{
   border-bottom: 1px solid var(--line);
   z-index: 10;
 }
+
 .header-inner{
   display: flex;
   align-items: center;
@@ -124,6 +87,7 @@ body{
   text-decoration: none;
   color: var(--text);
 }
+
 .brand-mark{
   width: 40px;
   height: 40px;
@@ -135,6 +99,7 @@ body{
   font-weight: 800;
   letter-spacing: .5px;
 }
+
 .brand-text{ display: grid; gap: 2px; }
 .brand-name{ font-weight: 700; }
 .brand-sub{ font-size: .88rem; color: var(--muted); }
@@ -144,6 +109,7 @@ body{
   gap: 14px;
   flex-wrap: wrap;
 }
+
 .nav a{
   color: var(--muted);
   text-decoration: none;
@@ -151,17 +117,23 @@ body{
   border-radius: 10px;
   border: 1px solid transparent;
 }
+
 .nav a:hover{
   color: var(--text);
   border-color: var(--line);
   background: rgba(255,255,255,.04);
 }
 
-.main{ padding-bottom: 48px; }
-
-.hero{
-  padding: 54px 0 26px;
+/* Optional: make current page slightly stronger if you add aria-current="page" */
+.nav a[aria-current="page"]{
+  color: var(--text);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.14);
 }
+
+/* ---------- Hero ---------- */
+.hero{ padding: 54px 0 26px; }
+
 .hero-grid{
   display: grid;
   grid-template-columns: 1.25fr .75fr;
@@ -188,6 +160,7 @@ body{
   line-height: 1.12;
   letter-spacing: -0.02em;
 }
+
 .summary{
   margin: 0 0 18px;
   color: var(--muted);
@@ -195,6 +168,7 @@ body{
   max-width: 62ch;
 }
 
+/* ---------- Buttons ---------- */
 .cta-row{
   display: flex;
   flex-wrap: wrap;
@@ -213,8 +187,9 @@ body{
   border: 1px solid var(--line);
   font-weight: 650;
   letter-spacing: .01em;
-  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease, filter .12s ease;
 }
+
 .btn:active{ transform: translateY(1px); }
 
 .btn-primary{
@@ -223,12 +198,14 @@ body{
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   box-shadow: 0 14px 30px rgba(110,231,255,.12);
 }
+
 .btn-primary:hover{ filter: brightness(1.04); }
 
 .btn-secondary{
   color: var(--text);
   background: rgba(255,255,255,.05);
 }
+
 .btn-secondary:hover{
   background: rgba(255,255,255,.07);
   border-color: rgba(255,255,255,.18);
@@ -238,11 +215,13 @@ body{
   color: var(--muted);
   background: transparent;
 }
+
 .btn-ghost:hover{
   color: var(--text);
   background: rgba(255,255,255,.04);
 }
 
+/* ---------- “Quick points” list card ---------- */
 .quick-points{
   display: grid;
   gap: 10px;
@@ -251,12 +230,14 @@ body{
   border: 1px solid var(--line);
   background: rgba(255,255,255,.03);
 }
+
 .point{
   display: grid;
   grid-template-columns: 14px 1fr;
   gap: 10px;
   align-items: start;
 }
+
 .dot{
   width: 10px;
   height: 10px;
@@ -265,9 +246,11 @@ body{
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   box-shadow: 0 0 0 4px rgba(110,231,255,.10);
 }
+
 .point p{ margin: 0; color: var(--muted); }
 .point strong{ color: var(--text); }
 
+/* ---------- Sticky hero card ---------- */
 .hero-card .card{
   position: sticky;
   top: 86px;
@@ -277,55 +260,135 @@ body{
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
+
 .card-title{
   margin: 0 0 10px;
   font-size: 1.05rem;
 }
-.meta{
-  margin: 0;
-  display: grid;
-  gap: 10px;
-}
-.meta-row{
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 10px;
-}
-dt{
-  color: var(--muted);
-  font-weight: 650;
-}
-dd{
-  margin: 0;
-  color: var(--text);
-}
+
 .card-divider{
   height: 1px;
   background: var(--line);
   margin: 14px 0;
 }
+
 .card-quote{
   margin: 0;
   color: var(--muted);
   font-style: italic;
 }
 
+/* ---------- Chips / meta pills (FLEX) ---------- */
+/* Default use: chips row */
+.meta-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Optional chip style if you use <span class="meta-chip">…</span> */
+.meta-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.meta-chip strong{ color: var(--text); font-weight: 650; }
+
+/* ---------- Definition list meta block (GRID) ---------- */
+/* This is the important fix: ONLY inside dl.meta do meta rows become grid. */
+.meta{
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+dl.meta .meta-row{
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 10px;
+  align-items: baseline;
+}
+
+dt{
+  color: var(--muted);
+  font-weight: 650;
+}
+
+dd{
+  margin: 0;
+  color: var(--text);
+}
+
+/* ---------- Sections / typography ---------- */
 .section{
   padding: 28px 0;
   border-top: 1px solid var(--line);
 }
+
 .section h2{
   margin: 0 0 8px;
   font-size: 1.35rem;
   letter-spacing: -0.01em;
 }
-.muted{ color: var(--muted); margin: 0; }
 
+.section h3{
+  margin: 18px 0 8px;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+p{ margin: 0 0 12px; }
+p:last-child{ margin-bottom: 0; }
+
+ul, ol{
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+li{ margin: 0.35rem 0; }
+
+.muted{ color: var(--muted); }
+
+/* ---------- Code blocks ---------- */
+pre{
+  margin: 14px 0 0;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.18);
+  overflow: auto;
+  max-width: 100%;
+}
+
+pre code{
+  display: block;
+  white-space: pre;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+code{
+  padding: 0.12rem 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.14);
+}
+
+/* ---------- Footer ---------- */
 .site-footer{
   border-top: 1px solid var(--line);
   padding: 18px 0;
   background: rgba(0,0,0,.12);
 }
+
 .footer-inner{
   display: flex;
   justify-content: space-between;
@@ -333,7 +396,40 @@ dd{
   flex-wrap: wrap;
 }
 
-/* Responsive */
+/* ---------- Optional: Page hero helpers (if you use them) ---------- */
+.page-hero{
+  padding: 3rem 0 1.5rem;
+}
+
+.page-hero__inner{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.eyebrow-pill{
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.page-title{
+  margin: 0.75rem 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.page-subtitle{
+  margin: 0 0 1rem;
+  opacity: 0.85;
+  max-width: 70ch;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 860px){
   .hero-grid{ grid-template-columns: 1fr; }
   .hero-card .card{ position: static; }
