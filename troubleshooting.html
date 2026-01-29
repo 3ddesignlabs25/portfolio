@@ -48,194 +48,335 @@
       </div>
     </section>
 
-    <!-- Case Study -->
+    <!-- ===================================================== -->
+    <!-- CASE STUDY 01 (Existing): Broken Python Virtual Environment -->
+    <!-- ===================================================== -->
     <section class="section">
       <div class="container">
         <h2>Broken Python Virtual Environment (Raspberry Pi)</h2>
+      </div>
+    </section>
 
-       <section class="section">
-  <div class="container">
-    <h2>Problem</h2>
-    <p>
-      While working in a Raspberry Pi–based Python environment, I began encountering
-      failures in scripts that had previously run without issue. These failures did
-      not follow a clear pattern and often appeared after unrelated changes, such as
-      installing new packages or restarting the system.
-    </p>
-    <p>
-      At the time, it was not obvious what the root cause was. Error messages pointed
-      to missing modules or import failures, but it was unclear whether the issue was
-      caused by my code, the Python environment, or underlying system changes. In some
-      cases, attempting one fix would appear to help, only for a different error to
-      surface later.
-    </p>
-    <p>
-      Debugging initially involved a degree of trial and error, driven by curiosity
-      and testing assumptions rather than a complete understanding of what was
-      happening internally. Through experimenting with environment activation,
-      rebuilding virtual environments, and observing changes in behavior, patterns
-      gradually became more visible.
-    </p>
-    <p>
-      The objective became less about immediately identifying a precise root cause
-      and more about restoring a predictable working environment while learning how
-      different configuration changes affected execution. This experience highlighted
-      the importance of isolation, documentation, and controlled experimentation when
-      troubleshooting system-level issues.
-    </p>
-  </div>
-</section>
+    <section class="section">
+      <div class="container">
+        <h2>Problem</h2>
+        <p>
+          While working in a Raspberry Pi–based Python environment, I began encountering
+          failures in scripts that had previously run without issue. These failures did
+          not follow a clear pattern and often appeared after unrelated changes, such as
+          installing new packages or restarting the system.
+        </p>
+        <p>
+          At the time, it was not obvious what the root cause was. Error messages pointed
+          to missing modules or import failures, but it was unclear whether the issue was
+          caused by my code, the Python environment, or underlying system changes. In some
+          cases, attempting one fix would appear to help, only for a different error to
+          surface later.
+        </p>
+        <p>
+          Debugging initially involved a degree of trial and error, driven by curiosity
+          and testing assumptions rather than a complete understanding of what was
+          happening internally. Through experimenting with environment activation,
+          rebuilding virtual environments, and observing changes in behavior, patterns
+          gradually became more visible.
+        </p>
+        <p>
+          The objective became less about immediately identifying a precise root cause
+          and more about restoring a predictable working environment while learning how
+          different configuration changes affected execution. This experience highlighted
+          the importance of isolation, documentation, and controlled experimentation when
+          troubleshooting system-level issues.
+        </p>
+      </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
+        <h2>Symptoms</h2>
+        <ul>
+          <li>
+            Python scripts that had previously executed successfully began failing
+            without any changes to the script files themselves.
+          </li>
+          <li>
+            Import-related errors appeared intermittently, often indicating that
+            modules were missing even though they had been installed earlier.
+          </li>
+          <li>
+            Running the same script produced different results depending on how the
+            session was started (new terminal session, SSH reconnect, or reboot).
+          </li>
+          <li>
+            Activating the Python virtual environment appeared to succeed, but behavior
+            suggested the system Python interpreter was sometimes still being used.
+          </li>
+          <li>
+            Some issues temporarily resolved after rebuilding the environment or
+            reinstalling packages, only to reappear later after additional changes.
+          </li>
+          <li>
+            Error output was inconsistent and not always immediately actionable,
+            making it difficult to distinguish between code issues and environment
+            configuration problems.
+          </li>
+        </ul>
+      </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
+        <h2>Diagnosis</h2>
+        <p>
+          Initial diagnosis focused on verifying whether the issue originated from
+          outdated or mismatched dependencies. All installed Python packages within
+          the virtual environment were reviewed and updated, and system packages were
+          brought up to date to rule out known incompatibilities.
+        </p>
+        <p>
+          When updating dependencies did not resolve the issue, the Python virtual
+          environment was fully removed and recreated. This was done to eliminate the
+          possibility of partial installs, corrupted state, or conflicts caused by
+          previous experimentation.
+        </p>
+        <p>
+          After environment resets failed to produce consistent results, attention
+          shifted to the application code itself. Individual scripts were reviewed,
+          modified, and in some cases temporarily removed to determine whether logic
+          errors or import behavior within the codebase were contributing to the
+          failures.
+        </p>
+        <p>
+          As inconsistencies persisted, broader system-level troubleshooting was
+          attempted. The Raspberry Pi was reimaged with a fresh operating system
+          install, and the sandbox was rebuilt from scratch to establish a known
+          baseline state.
+        </p>
+        <p>
+          During this process, the setup script used to configure the environment was
+          also examined and edited to check for mistakes, incomplete commands, or
+          unexpected behavior that could have caused dependencies to install or
+          configure incorrectly.
+        </p>
+        <p>
+          Despite these efforts, the exact cause remained unclear. At this stage, the
+          issue was escalated by seeking external input, which helped clarify how
+          environment activation and interpreter selection were affecting execution.
+          With this guidance, the problem became easier to isolate and resolve.
+        </p>
+      </div>
+    </section>
 
-       <section class="section">
-  <div class="container">
-    <h2>Symptoms</h2>
-    <ul>
-      <li>
-        Python scripts that had previously executed successfully began failing
-        without any changes to the script files themselves.
-      </li>
-      <li>
-        Import-related errors appeared intermittently, often indicating that
-        modules were missing even though they had been installed earlier.
-      </li>
-      <li>
-        Running the same script produced different results depending on how the
-        session was started (new terminal session, SSH reconnect, or reboot).
-      </li>
-      <li>
-        Activating the Python virtual environment appeared to succeed, but behavior
-        suggested the system Python interpreter was sometimes still being used.
-      </li>
-      <li>
-        Some issues temporarily resolved after rebuilding the environment or
-        reinstalling packages, only to reappear later after additional changes.
-      </li>
-      <li>
-        Error output was inconsistent and not always immediately actionable,
-        making it difficult to distinguish between code issues and environment
-        configuration problems.
-      </li>
-    </ul>
-  </div>
-</section>
+    <section class="section">
+      <div class="container">
+        <h2>Resolution</h2>
+        <p>
+          The issue was ultimately stabilized by reestablishing a clean and predictable
+          execution environment rather than identifying a single isolated failure.
+          After reviewing interpreter paths and environment activation behavior, it
+          became clear that inconsistent use of the system Python interpreter versus
+          the virtual environment was contributing to the observed issues.
+        </p>
+        <p>
+          A fresh Python virtual environment was created and verified explicitly by
+          checking interpreter paths before running any scripts. Dependencies were
+          reinstalled in a controlled order, and scripts were tested incrementally to
+          confirm expected behavior at each step.
+        </p>
+        <p>
+          The setup script was adjusted to ensure environment creation and activation
+          steps were explicit and repeatable. This reduced ambiguity around which
+          interpreter and package set were being used during execution.
+        </p>
+        <p>
+          Once the environment was rebuilt and validated, script failures stopped
+          occurring intermittently and behavior became consistent across sessions,
+          reboots, and SSH connections. While the exact trigger that caused the initial
+          instability could not be conclusively identified, enforcing stricter
+          environment isolation and verification resolved the practical impact of the
+          issue.
+        </p>
+        <p>
+          The resolution reinforced the importance of treating environment state as a
+          first-class component of troubleshooting, particularly when working across
+          multiple tools, sessions, and system updates.
+        </p>
+      </div>
+    </section>
 
-        <section class="section">
-  <div class="container">
-    <h2>Diagnosis</h2>
-    <p>
-      Initial diagnosis focused on verifying whether the issue originated from
-      outdated or mismatched dependencies. All installed Python packages within
-      the virtual environment were reviewed and updated, and system packages were
-      brought up to date to rule out known incompatibilities.
-    </p>
-    <p>
-      When updating dependencies did not resolve the issue, the Python virtual
-      environment was fully removed and recreated. This was done to eliminate the
-      possibility of partial installs, corrupted state, or conflicts caused by
-      previous experimentation.
-    </p>
-    <p>
-      After environment resets failed to produce consistent results, attention
-      shifted to the application code itself. Individual scripts were reviewed,
-      modified, and in some cases temporarily removed to determine whether logic
-      errors or import behavior within the codebase were contributing to the
-      failures.
-    </p>
-    <p>
-      As inconsistencies persisted, broader system-level troubleshooting was
-      attempted. The Raspberry Pi was reimaged with a fresh operating system
-      install, and the sandbox was rebuilt from scratch to establish a known
-      baseline state.
-    </p>
-    <p>
-      During this process, the setup script used to configure the environment was
-      also examined and edited to check for mistakes, incomplete commands, or
-      unexpected behavior that could have caused dependencies to install or
-      configure incorrectly.
-    </p>
-    <p>
-      Despite these efforts, the exact cause remained unclear. At this stage, the
-      issue was escalated by seeking external input, which helped clarify how
-      environment activation and interpreter selection were affecting execution.
-      With this guidance, the problem became easier to isolate and resolve.
-    </p>
-  </div>
-</section>
+    <section class="section">
+      <div class="container">
+        <h2>Lessons Learned</h2>
+        <ul>
+          <li>
+            <strong>Environment isolation applies across languages.</strong><br />
+            The same principles used to stabilize Python environments can be applied to
+            other languages and toolchains. This reinforced that controlled setup,
+            isolation, and rebuildability are transferable skills rather than Python-
+            specific solutions.
+          </li>
+          <li>
+            <strong>Tooling must match the interpreter or runtime.</strong><br />
+            Installing packages, libraries, or tools without confirming they align with
+            the active interpreter or runtime leads to subtle and difficult-to-diagnose
+            failures. Dependencies must be installed intentionally for the environment
+            that will actually execute the code.
+          </li>
+          <li>
+            <strong>Mismatched environments cause silent breakage.</strong><br />
+            Systems do not always fail loudly when components are misaligned. Scripts may
+            partially work or fail inconsistently, making verification of execution
+            context just as important as code correctness.
+          </li>
+          <li>
+            <strong>Stability comes from discipline, not complexity.</strong><br />
+            The most effective improvements came from simplifying workflows, validating
+            assumptions, and rebuilding cleanly rather than layering additional fixes on
+            top of an unstable system.
+          </li>
+        </ul>
+      </div>
+    </section>
 
+    <!-- ===================================================== -->
+    <!-- CASE STUDY 02 (New): CyberPie Field Node -->
+    <!-- ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>CyberPie Field Node: Network Bring-Up & Service Stability (Pi Zero 2 W)</h2>
 
-       <section class="section">
-  <div class="container">
-    <h2>Resolution</h2>
-    <p>
-      The issue was ultimately stabilized by reestablishing a clean and predictable
-      execution environment rather than identifying a single isolated failure.
-      After reviewing interpreter paths and environment activation behavior, it
-      became clear that inconsistent use of the system Python interpreter versus
-      the virtual environment was contributing to the observed issues.
-    </p>
-    <p>
-      A fresh Python virtual environment was created and verified explicitly by
-      checking interpreter paths before running any scripts. Dependencies were
-      reinstalled in a controlled order, and scripts were tested incrementally to
-      confirm expected behavior at each step.
-    </p>
-    <p>
-      The setup script was adjusted to ensure environment creation and activation
-      steps were explicit and repeatable. This reduced ambiguity around which
-      interpreter and package set were being used during execution.
-    </p>
-    <p>
-      Once the environment was rebuilt and validated, script failures stopped
-      occurring intermittently and behavior became consistent across sessions,
-      reboots, and SSH connections. While the exact trigger that caused the initial
-      instability could not be conclusively identified, enforcing stricter
-      environment isolation and verification resolved the practical impact of the
-      issue.
-    </p>
-    <p>
-      The resolution reinforced the importance of treating environment state as a
-      first-class component of troubleshooting, particularly when working across
-      multiple tools, sessions, and system updates.
-    </p>
-  </div>
-</section>
+        <h3>Problem</h3>
+        <p>
+          While building CyberPie as a service-first field node, I ran into reliability issues during initial setup:
+          the device couldn’t reliably get internet access for updates and installs, and service startup behavior
+          wasn’t consistent after reboots. The goal was to reach a predictable “boot → network → services” flow.
+        </p>
 
-       <section class="section">
-  <div class="container">
-    <h2>Lessons Learned</h2>
-    <ul>
-      <li>
-        <strong>Environment isolation applies across languages.</strong><br />
-        The same principles used to stabilize Python environments can be applied to
-        other languages and toolchains. This reinforced that controlled setup,
-        isolation, and rebuildability are transferable skills rather than Python-
-        specific solutions.
-      </li>
-      <li>
-        <strong>Tooling must match the interpreter or runtime.</strong><br />
-        Installing packages, libraries, or tools without confirming they align with
-        the active interpreter or runtime leads to subtle and difficult-to-diagnose
-        failures. Dependencies must be installed intentionally for the environment
-        that will actually execute the code.
-      </li>
-      <li>
-        <strong>Mismatched environments cause silent breakage.</strong><br />
-        Systems do not always fail loudly when components are misaligned. Scripts may
-        partially work or fail inconsistently, making verification of execution
-        context just as important as code correctness.
-      </li>
-      <li>
-        <strong>Stability comes from discipline, not complexity.</strong><br />
-        The most effective improvements came from simplifying workflows, validating
-        assumptions, and rebuilding cleanly rather than layering additional fixes on
-        top of an unstable system.
-      </li>
-    </ul>
-  </div>
-</section>
+        <h3>Symptoms</h3>
+        <ul>
+          <li>No internet on first boot / after config changes</li>
+          <li>Missing common DHCP tooling (depending on image/minimal install)</li>
+          <li>Interface present but not acquiring an IP lease</li>
+          <li>Services failing on boot because networking wasn’t ready yet</li>
+        </ul>
 
+        <h3>Diagnosis</h3>
+        <p>
+          I treated it like a help desk escalation: confirm link state, confirm interface config, confirm DHCP client
+          availability, and confirm which network stack was actually installed/enabled. When tooling wasn’t present,
+          the root cause wasn’t “DHCP is broken,” it was “the expected client isn’t installed / the wrong network
+          manager is active.”
+        </p>
+
+        <h3>Resolution</h3>
+        <ul>
+          <li>Verified interface state and link (bring interface up before chasing DNS)</li>
+          <li>Installed/enabled the correct DHCP/network stack for the image (minimal installs differ)</li>
+          <li>Adjusted service dependencies so UI/tool services wait for the network to be online when needed</li>
+          <li>Validated with reboot testing to ensure it wasn’t a one-time “works until restart” fix</li>
+        </ul>
+
+        <h3>Lessons Learned</h3>
+        <ul>
+          <li><strong>Assume nothing about baseline tooling.</strong> Minimal images can omit expected DHCP utilities.</li>
+          <li><strong>Fix boot order, not just commands.</strong> Service reliability comes from correct dependencies.</li>
+          <li><strong>Reboot tests are the truth serum.</strong> If it only works once, it’s not solved.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- CASE STUDY 03 (New): Control Node / Security Console -->
+    <!-- ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Control Node / Security Console: OS Setup & Service Issues (Pi 5)</h2>
+
+        <h3>Problem</h3>
+        <p>
+          While configuring the Pi 5 “Security Console” control node, I encountered setup blockers that are common
+          in real IT environments: package manager interruptions, repository misconfiguration, and service naming
+          mismatches. These prevented normal updates and services (like SSH) from coming online cleanly.
+        </p>
+
+        <h3>Symptoms</h3>
+        <ul>
+          <li>Package installs failing due to interrupted dpkg state</li>
+          <li>Update errors caused by stale / incorrect repository sources</li>
+          <li>Service enable commands failing because unit names didn’t match the OS’s service naming</li>
+        </ul>
+
+        <h3>Diagnosis</h3>
+        <p>
+          The key was to stop treating it as one error. I separated it into: (1) restore package manager consistency,
+          (2) fix apt sources, then (3) verify the correct service package is installed and the unit name is correct.
+          That sequencing prevents “fixing symptoms” while the system is still in a broken state.
+        </p>
+
+        <h3>Resolution</h3>
+        <ul>
+          <li>Recovered dpkg consistency first (finish configuration before attempting more installs)</li>
+          <li>Removed/disabled invalid repository sources so updates could run securely</li>
+          <li>Installed the correct packages (e.g., OpenSSH server) and enabled the right service unit</li>
+          <li>Re-tested after reboot to confirm persistence</li>
+        </ul>
+
+        <h3>Lessons Learned</h3>
+        <ul>
+          <li><strong>Package manager health is priority zero.</strong> If dpkg/apt is inconsistent, everything else is noise.</li>
+          <li><strong>Repo configuration matters for security.</strong> “Insecure repo” warnings aren’t optional.</li>
+          <li><strong>Service names aren’t universal.</strong> Verify units and packages on the actual OS image.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- CASE STUDY 04 (New): Home Server Hosting / Self-Hosting -->
+    <!-- ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Home Server Hosting: Self-Hosting Websites & Reliability Hardening</h2>
+
+        <h3>Problem</h3>
+        <p>
+          While preparing to self-host this portfolio and related web projects, I needed the hosting environment to be
+          reliable, secure, and maintainable. That meant treating the server like production: consistent deploy steps,
+          predictable service behavior, and practical security measures.
+        </p>
+
+        <h3>Symptoms</h3>
+        <ul>
+          <li>Site not reachable after config changes (service, firewall, or routing-related)</li>
+          <li>Permissions/ownership issues after moving files and setting up deploy workflows</li>
+          <li>Configuration drift between “it worked once” and “it survives reboots/updates”</li>
+          <li>Integration friction between static hosting (GitHub Pages) and future self-hosted services</li>
+        </ul>
+
+        <h3>Diagnosis</h3>
+        <p>
+          I approached it as layered troubleshooting: network reachability first, then service status, then logs,
+          then permissions, then configuration correctness. For every fix, I verified the change via service status
+          checks and log inspection rather than assuming the issue was resolved.
+        </p>
+
+        <h3>Resolution</h3>
+        <ul>
+          <li>Validated network access and service binding (is the server reachable, and is the service listening?)</li>
+          <li>Used service management + logs to isolate failures quickly (start/stop, enable on boot, review logs)</li>
+          <li>Standardized file permissions/ownership for web roots and deploy directories</li>
+          <li>Documented repeatable deploy steps so updates don’t become “tribal knowledge”</li>
+          <li>Separated “GitHub review mode” from “self-hosted mode” so the portfolio stays demo-friendly</li>
+        </ul>
+
+        <h3>Lessons Learned</h3>
+        <ul>
+          <li><strong>Logs are the receipt.</strong> Guessing wastes time; logs show what actually failed and why.</li>
+          <li><strong>Repeatability is a security feature.</strong> Consistent deploy steps reduce misconfig risk.</li>
+          <li><strong>Scope separation matters.</strong> Keep public demo safe; keep private services behind proper controls.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -248,3 +389,4 @@
   </script>
 </body>
 </html>
+
