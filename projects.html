@@ -456,6 +456,117 @@ printf "\nSetup complete. Please reboot the Raspberry Pi for group changes to ta
         </code></pre>
       </div>
     </section>
+<!-- ===================== -->
+<!-- NEW PROJECT: CyberPie -->
+<!-- ===================== -->
+<section class="project">
+  <h2>CyberPie (Raspberry Pi Zero 2 W)</h2>
+  <p class="project-tagline">
+    A portable, service-driven cybersecurity field node with a local TFT UI (no browser required).
+  </p>
+
+  <h3>Problem</h3>
+  <p>
+    When working in a lab or authorized environment, it’s easy to lose time juggling laptops, adapters,
+    and “where did that scan output go?” CyberPie is designed to be a small, dedicated field node that
+    runs a guided workflow directly on-device.
+  </p>
+
+  <h3>Constraints &amp; Goal</h3>
+  <p>
+    <strong>Constraints:</strong> limited CPU/RAM, power budget, storage, and a small SPI TFT display with
+    button/joystick input. Must remain stable even when tools fail or the network is flaky.
+  </p>
+  <p>
+    <strong>Goal:</strong> provide a simple “safe workflow” interface for approved diagnostic/security tasks,
+    with consistent logging and predictable operation.
+  </p>
+
+  <h3>System Overview</h3>
+  <p>
+    CyberPie runs as a background service and presents a lightweight on-screen menu UI for launching
+    predefined tasks (e.g., local network inventory in a controlled lab, device status checks, log review).
+    Outputs are stored locally and can be exported to a workstation for reporting.
+  </p>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li>Service-based architecture (boots into the tool UI without needing a web server)</li>
+    <li>Small-screen UX designed for TFT + physical inputs</li>
+    <li>Workflow separation: “Safe” menu for approved/standard tasks; expandable “Advanced” area (future)</li>
+    <li>Structured logging + exportable artifacts for documentation/reporting</li>
+    <li>Fail-safe behavior (tool errors don’t crash the UI; clear status + recovery paths)</li>
+  </ul>
+
+  <h3>Tech Stack</h3>
+  <ul>
+    <li>Raspberry Pi Zero 2 W</li>
+    <li>Linux (headless/service-first)</li>
+    <li>Python-based UI/menu + system service management</li>
+    <li>Modular tool wrappers + logging utilities</li>
+  </ul>
+
+  <h3>Status</h3>
+  <p>
+    Active build and iteration. Focus is on reliability, UI responsiveness, and clean logs.
+  </p>
+</section>
+
+<!-- =========================== -->
+<!-- NEW PROJECT: Security Console -->
+<!-- =========================== -->
+<section class="project">
+  <h2>Security Console (Raspberry Pi 5)</h2>
+  <p class="project-tagline">
+    A portable “command station” for managing local tooling, logs, and connected field nodes.
+  </p>
+
+  <h3>Problem</h3>
+  <p>
+    A small field node is great, but complex work benefits from a more capable hub for orchestration,
+    storage, and review. Security Console is the bigger sibling: a Pi 5-based platform meant to be the
+    primary touch interface and control point in an authorized environment.
+  </p>
+
+  <h3>Constraints &amp; Goal</h3>
+  <p>
+    <strong>Constraints:</strong> portable power/thermal management, clean shutdown behavior, and a UI that
+    stays usable on a touchscreen without feeling like a full desktop.
+  </p>
+  <p>
+    <strong>Goal:</strong> provide a reliable, self-contained console that can run tools locally, manage data,
+    and act as a central review/export point.
+  </p>
+
+  <h3>System Overview</h3>
+  <p>
+    Security Console runs a touchscreen-friendly UI and a set of services for organizing tooling, job runs,
+    and outputs. It’s designed to integrate with smaller nodes (like CyberPie) by collecting logs/artifacts
+    and presenting them in a consistent, reviewable way.
+  </p>
+
+  <h3>Key Features</h3>
+  <ul>
+    <li>Touchscreen-first interface for launching and monitoring jobs</li>
+    <li>Centralized artifact storage (logs, exports, reports-in-progress)</li>
+    <li>Service-driven design (stable boot flow, predictable state)</li>
+    <li>Designed for compartmentalization and future expansion (containers/modules)</li>
+    <li>Operational focus: clarity, repeatability, and documentation-ready outputs</li>
+  </ul>
+
+  <h3>Tech Stack</h3>
+  <ul>
+    <li>Raspberry Pi 5</li>
+    <li>Linux + system services</li>
+    <li>Modular tooling approach (room for Docker/containers if needed)</li>
+    <li>Touch UI + structured logging/export</li>
+  </ul>
+
+  <h3>Status</h3>
+  <p>
+    Active configuration and architecture work. Current focus: platform stability, UI flow, and clean data handling.
+  </p>
+</section>
 
     <!-- ===================================================== -->
     <!-- PROJECT TEMPLATE (ANNOTATED – COPY OR UNCOMMENT LATER) -->
